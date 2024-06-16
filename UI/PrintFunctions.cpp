@@ -1,4 +1,7 @@
 #include "PrintFunctions.h"
+#include <iostream>
+#include <string>
+#include <iomanip>
 
 using namespace std;
 
@@ -29,26 +32,57 @@ void printTypes()
     cout << "Enter 2 - Complex" << endl;
 };
 
-void printOperationChoice()
+void printVectorOperationChoice()
 {
     cout << "What do you want to test?" << endl;
 
     cout << "Enter 1 - Addition" << endl;
     cout << "Enter 2 - Multiplication by scalar" << endl;
-    cout << "Enter 3 - Norm calculation" << endl;
-    cout << "Enter 4 - Sclalar multiplication" << endl;
+    cout << "Enter 3 - Norm" << endl;
+    cout << "Enter 4 - Scalar multiplication" << endl;
 };
 
-// void printManuallyQuestion()
-// {
-//     cout << "Do you want to create the structure manually" << endl;
-//     cout << "Enter 1 - Int" << endl;
-//     cout << "Enter 2 - float" << endl;
-// };
+void printSquareMatrixOperationChoice()
+{
+    cout << "What do you want to test?" << endl;
+
+    cout << "Enter 1 - Addition" << endl;
+    cout << "Enter 2 - Multiplication by scalar" << endl;
+    cout << "Enter 3 - Norm" << endl;
+    cout << "Enter 4 - Row/Columns operations" << endl;
+}
+
+void printRowColumnChoice()
+{
+    cout << "Do you want to operate on rows or colums?" << endl;
+
+    cout << "Enter 1 - Rows" << endl;
+    cout << "Enter 2 - Columns" << endl;
+}
+
+void printRowColumnsOperationsChoice()
+{
+    cout << "What operation do you want to test?" << endl;
+
+    cout << "Enter 1 - Swap" << endl;
+    cout << "Enter 2 - Multiplication by scalar" << endl;
+    cout << "Enter 3 - Addition" << endl;
+}
 
 void printMainMenu()
 {
     cout << "Enter 1 - To test a vector" << endl;
-    cout << "Enter 2 - To run tests" << endl;
-    cout << "Enter 3 - To Cancel" << endl;
+    cout << "Enter 2 - To test a square matrix" << endl;
+    cout << "Enter 3 - To run tests" << endl;
+    cout << "Enter 4 - To cancel" << endl;
 };
+
+void printComplex(dt::Complex number)
+{
+    cout << std::setfill(' ') << std::setw(4) << std::right << number.getReal() << " + i" << std::setfill(' ') << std::setw(4) << std::left << number.getImg() << "";
+}
+
+void printInteger(int number)
+{
+    cout << std::setfill(' ') << std::setw(4) << number << " ";
+}

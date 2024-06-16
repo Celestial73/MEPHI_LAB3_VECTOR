@@ -32,7 +32,3 @@ namespace dt
         void setImg(const double &value);
     };
 }
-
-// typedef struct Complex
-// {
-// };

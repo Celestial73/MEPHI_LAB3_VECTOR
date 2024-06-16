@@ -2,6 +2,7 @@
 #include "../DataStructures/Vector.h"
 #include "TestMacros.h"
 #include "../DataTypes/Complex.h"
+#include "../DataTypes/Integer.h"
 
 void testVector();
 void testIntegerVectorSizeConstructor();
@@ -26,10 +27,3 @@ void testComplexVectorAddition();
 void testComplexVectorMultiplicationByScalar();
 void testComplexVectorNorm();
 void testComplexVectorScalarMultiplication();
-
-int intSquareRoot(const int &);
-int getIntegerZero();
-int getIntegerOne();
-const dt::Complex getComplexZero();
-
-const dt::Complex getComplexOne();

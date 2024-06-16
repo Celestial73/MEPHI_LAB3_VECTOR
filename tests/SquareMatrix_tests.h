@@ -1,0 +1,22 @@
+#pragma once
+#include "TestMacros.h"
+#include "../DataStructures/SquareMatrix.h"
+#include "../DataTypes/Complex.h"
+#include "../DataTypes/Integer.h"
+
+void testSquareMatrix();
+void testIntegerSquareMatrixSizeConstructor();
+void testIntegerSquareMatrixItemsConstructor();
+void testIntegerSquareMatrixCopyConstructor();
+void testIntegerSquareMatrixEqualsOperator();
+void testIntegerSquareMatrixGetters();
+void testIntegerSquareMatrixSetters();
+void testIntegerSquareMatrixAddition();
+void testIntegerSquareMatrixMultiplicationByScalar();
+void testIntegerSquareMatrixNorm();
+void testSwapRows();
+void testSwapColumns();
+void testMultiplyRow();
+void testMultiplyColumn();
+void testAddRowToRow();
+void testAddColumnToColumn();

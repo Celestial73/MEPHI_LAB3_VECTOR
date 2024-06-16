@@ -15,9 +15,12 @@ void menu()
             tryVector();
             break;
         case 2:
-            runTests();
+            trySquareMatrix();
             break;
         case 3:
+            runTests();
+            break;
+        case 4:
             return;
         default:
             return;
@@ -29,6 +32,7 @@ void runTests()
 {
     testVector();
     testComplex();
+    testSquareMatrix();
 }
 
 void tryVector()
@@ -37,7 +41,7 @@ void tryVector()
     printTypes();
     type = getIntegerInRange(1, 2);
     int manageNumber;
-    printOperationChoice();
+    printVectorOperationChoice();
     manageNumber = getIntegerInRange(1, 4);
     switch (manageNumber)
     {
@@ -78,6 +82,51 @@ void tryVector()
     }
 }
 
+void trySquareMatrix()
+{
+    int type;
+    printTypes();
+    type = getIntegerInRange(1, 2);
+    int manageNumber;
+    printSquareMatrixOperationChoice();
+    manageNumber = getIntegerInRange(1, 4);
+    switch (manageNumber)
+    {
+    case 1:
+        if (type == 1)
+        {
+            martixAddition(createIntegerSquareMatrixManually, printInteger);
+            break;
+        }
+        martixAddition(createComplexSquareMatrixManually, printComplex);
+        break;
+    case 2:
+        if (type == 1)
+        {
+            matrixMultiplicationByScalar(createIntegerSquareMatrixManually, printInteger, createInteger);
+            break;
+        }
+        matrixMultiplicationByScalar(createComplexSquareMatrixManually, printComplex, createComplex);
+        break;
+    case 3:
+        if (type == 1)
+        {
+            matrixNorm(createIntegerSquareMatrixManually, printInteger);
+            break;
+        }
+        matrixNorm(createComplexSquareMatrixManually, printComplex);
+        break;
+    case 4:
+        int rowColumnFlag;
+        printRowColumnChoice();
+        rowColumnFlag = getIntegerInRange(1, 2);
+        manageRowColumnOperations(type, rowColumnFlag);
+        break;
+    default:
+        return;
+    }
+}
+
 int getIntegerInRange(int min, int max)
 {
     while (true)
@@ -96,6 +145,72 @@ int getIntegerInRange(int min, int max)
             return number;
         }
         cout << "Number out of range" << endl;
+    }
+}
+
+void manageRowColumnOperations(int type, int rowColumnFlag)
+{
+    int operationCode;
+    printRowColumnsOperationsChoice();
+    operationCode = getIntegerInRange(1, 3);
+    switch (operationCode)
+    {
+    case 1:
+        if (type == 1)
+        {
+            if (rowColumnFlag == 1)
+            {
+                matrixSwapRows(createIntegerSquareMatrixManually, printInteger, createInteger);
+                break;
+            }
+            matrixSwapColumns(createIntegerSquareMatrixManually, printInteger, createInteger);
+            break;
+        }
+        if (rowColumnFlag == 1)
+        {
+            matrixSwapRows(createComplexSquareMatrixManually, printComplex, createComplex);
+            break;
+        }
+        matrixSwapColumns(createComplexSquareMatrixManually, printComplex, createComplex);
+        break;
+    case 2:
+        if (type == 1)
+        {
+            if (rowColumnFlag == 1)
+            {
+                matrixMultiplyRow(createIntegerSquareMatrixManually, printInteger, createInteger);
+                break;
+            }
+            matrixMultiplyColumn(createIntegerSquareMatrixManually, printInteger, createInteger);
+            break;
+        }
+        if (rowColumnFlag == 1)
+        {
+            matrixMultiplyRow(createComplexSquareMatrixManually, printComplex, createComplex);
+            break;
+        }
+        matrixMultiplyColumn(createComplexSquareMatrixManually, printComplex, createComplex);
+        break;
+    case 3:
+        if (type == 1)
+        {
+            if (rowColumnFlag == 1)
+            {
+                matrixAddRows(createIntegerSquareMatrixManually, printInteger, createInteger);
+                break;
+            }
+            matrixAddColumns(createIntegerSquareMatrixManually, printInteger, createInteger);
+            break;
+        }
+        if (rowColumnFlag == 1)
+        {
+            matrixAddRows(createComplexSquareMatrixManually, printComplex, createComplex);
+            break;
+        }
+        matrixAddColumns(createComplexSquareMatrixManually, printComplex, createComplex);
+        break;
+    default:
+        break;
     }
 }
 
@@ -127,16 +242,49 @@ ComplexVector createComplexVectorManually()
     return ComplexVector(nums, length);
 };
 
+IntegerSquareMatrix createIntegerSquareMatrixManually()
+{
+    int size = 0;
+    cout << "Enter the size (<100)" << endl;
+    size = getIntegerInRange(0, 99);
+
+    int **arr = new int *[size];
+    for (int i = 0; i < size; i++)
+    {
+        arr[i] = new int[size];
+        for (int j = 0; j < size; j++)
+        {
+            cout << "[" << i << "][" << j << "] item: ";
+            arr[i][j] = createInteger();
+        }
+    }
+    return IntegerSquareMatrix(arr, size);
+};
+
+ComplexSquareMatrix createComplexSquareMatrixManually()
+{
+    int size = 0;
+    cout << "Enter the size (<100)" << endl;
+    size = getIntegerInRange(0, 99);
+
+    dt::Complex **arr = new dt::Complex *[size];
+    for (int i = 0; i < size; i++)
+    {
+        arr[i] = new dt::Complex[size];
+        for (int j = 0; j < size; j++)
+        {
+            cout << "[" << i << "][" << j << "] item: ";
+            arr[i][j] = createComplex();
+        }
+    }
+    return ComplexSquareMatrix(arr, size);
+};
+
 int createInteger()
 {
     int number;
     std::cin >> number;
     return number;
-}
-
-void printInteger(int number)
-{
-    cout << number << endl;
 }
 
 dt::Complex createComplex()
@@ -152,11 +300,6 @@ dt::Complex createComplex()
     number.setReal(real);
     cout << number.getReal() << " + i" << number.getImg() << endl;
     return number;
-}
-
-void printComplex(dt::Complex number)
-{
-    cout << number.getReal() << " + i" << number.getImg() << endl;
 }
 
 int createRandomIntNumber(int maxNumber)

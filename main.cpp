@@ -1,6 +1,8 @@
 #include <iostream>
 #include "./UI/Menu.h"
 
+#include "./tests/SquareMatrix_tests.h"
+
 using namespace std;
 
 int main()
